@@ -84,6 +84,9 @@ Plug 'nvim-treesitter/nvim-treesitter'
 " floaterm
 Plug 'voldikss/vim-floaterm'
 
+" goyo
+Plug 'junegunn/goyo.vim'
+
 
 
 call plug#end()
@@ -94,6 +97,8 @@ call plug#end()
 
 " ultsnips
 let g:UltiSnipsExpandTrigger="<nop>"
+
+" goyo
 
 " vimtex
 "
