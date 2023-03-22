@@ -44,7 +44,7 @@ nnoremap L $
 nnoremap <Leader>hl :nohlsearch<CR>
 noremap <Leader>rc :source $HOME/.config/nvim/init.vim<CR>
 
-" complie
+" compile
 noremap R :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
@@ -65,6 +65,8 @@ Plug 'goolord/alpha-nvim'
 Plug 'morhetz/gruvbox'
 Plug 'connorholyday/vim-snazzy'
 
+" nvim-tree
+Plug 'nvim-tree/nvim-tree.lua'
 
 " Tex
 Plug 'lervag/vimtex'
@@ -78,6 +80,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " nvim-treesitter
 Plug 'nvim-treesitter/nvim-treesitter'
+
+" floaterm
+Plug 'voldikss/vim-floaterm'
+
 
 
 call plug#end()
@@ -164,13 +170,50 @@ vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
 
-
-
-
+" floaterm
+noremap tt :FloatermNew<CR>
 
 " vim-tree sitter
-
 " alpha-vim
+"
+" tree
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+nnoremap <Leader>e :NvimTreeToggle<CR>
+lua << EOF
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+	view = {
+		mappings = {
+			list = {
+			{ key ="P", action= "cd" },
+			{ key ="<Tab>", action= "expand" },
+			{ key ="A", action= "create" },
+			{ key ="<Esc>", action= "close" },
+			{ key ="<BS>", action= "dir_up" },
+		},
+	},
+		float = {
+			enable = true,
+			open_win_config = function()
+			local columns = vim.o.columns
+			local lines = vim.o.lines
+			local width = math.max(math.floor(columns * 0.5), 50)
+			local height = math.max(math.floor(lines * 0.5), 20)
+			local left = math.ceil((columns - width) * 0.5)
+			local top = math.ceil((lines - height) * 0.5 - 2)
+			return { relative = "editor", border = "rounded", width = width, height = height, row = top, col = left }
+			end,
+		}
+	}
+})
+EOF
 
 
 " ===== Final =====
