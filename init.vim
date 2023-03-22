@@ -21,9 +21,11 @@ set softtabstop=2
 set tabstop=2
 set autoindent
 set list
-setlocal spell
+set autochdir
+set listchars=tab:\|\ ,trail:▫
 set spelllang=en_us
 inoremap <C-m> <c-g>u<ESC>[s1z=`]a<c-g>u
+autocmd BufRead,BUfNewFIle *.tex setlocal spell
 
 " set pumblend=15 ==> confict with colorscheme
 
@@ -42,6 +44,16 @@ nnoremap L $
 nnoremap <Leader>hl :nohlsearch<CR>
 noremap <Leader>rc :source $HOME/.config/nvim/init.vim<CR>
 
+" complie
+noremap R :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+	exec "w"
+	if &filetype == 'python'
+		set splitbelow
+		:sp
+		:term python3 %
+	endif
+endfunc
 
 " ==== vim-plug =====
 call plug#begin('$HOME/.config/nvim/plugged')
