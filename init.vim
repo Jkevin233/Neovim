@@ -1,6 +1,5 @@
 " === basic settings
 " file type plugin indent on
-
 syntax on
 set nobackup
 set hidden
@@ -74,6 +73,8 @@ Plug 'lervag/vimtex'
 " Snips
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs'
+
 
 " coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -107,6 +108,7 @@ let g:vimtex_view_method='zathura'
 set conceallevel=1
 let g:tex_conceal='abdmg'
 let maplocalleader = " "
+let g:vitex_quickfix_mode = 0
 
 map <Leader>lt :VimtexTocToggle<CR>
 let g:vimtex_toc_config = {
